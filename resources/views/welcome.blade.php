@@ -4,17 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <header class="w-full py-4 px-6 bg-white shadow-sm">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
-    <div class="text-lg font-semibold">Biblioteca Virtual</div>
-    <nav class="space-x-4">
-      <a href="" class="text-slate-700 hover:text-slate-900">Login</a>
-      <a href="" class="text-slate-700 hover:text-slate-900">Registro</a>
-    </nav>
-  </div>
-</header>
-    hola mundo
+<body class="img h-screen w-full object-cover" style="background-image: url('fondo.jfif'); ">
+    @include('Header')
 </body>
 </html>
