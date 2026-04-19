@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('adeudos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id('id_adeudos');
+        $table->dateTime('fecha_limite');
+        $table->foreignId('Libros_id_libros')->constrained('libros', 'id_libros');
+        $table->foreignId('Usuarios_id_usuario')->constrained('users', 'id_usuario'); 
+        $table->timestamps();
         });
     }
 
