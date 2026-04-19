@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('favoritos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+   public function up(): void
+{
+    Schema::create('favoritos', function (Blueprint $table) {
+        $table->foreignId('id_usuario')->constrained('users', 'id_usuario');
+        $table->foreignId('id_libros')->constrained('libros', 'id_libros');
+        $table->primary(['id_usuario', 'id_libros']); // Llave primaria compuesta
+    });
+}
+
 
     /**
      * Reverse the migrations.
