@@ -12,11 +12,11 @@
         <div class="h-12 bg-gradient-to-r from-slate-900 via-blue-900 to-slate-950 flex items-center justify-between px-6 border-b border-slate-700">
             <div class="flex items-center space-x-3">
                 <div class="w-8 h-8 rounded-full bg-slate-400 flex items-center justify-center text-slate-900 font-bold uppercase">
-                    {{ Str::substr($usuario->name, 0, 1) }}
+                    {{ Str::substr($usuario->nombre, 0, 1) }}
                 </div>
                 <div class="text-xs">
-                    <p class="font-semibold leading-tight">{{ $usuario->name }}</p>
-                    <p class="text-gray-400 text-[10px]">{{ $usuario->email }}</p>
+                    <p class="font-semibold leading-tight">{{ $usuario->nombre }}</p>
+                    <p class="text-gray-400 text-[10px]">{{ $usuario->correo }}</p>
                 </div>
             </div>
             <div class="text-sm font-bold tracking-wider text-gray-300">
@@ -56,6 +56,16 @@
                             </svg>
                             Contacto
                         </a>
+
+                        @if($usuario->rol === 'admin')
+                            <div class="border-t border-gray-200"></div>
+                            <a href="{{ route('admin.libros.index') }}" class="group flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-red-100 hover:text-red-900 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-4 w-4 text-red-400 group-hover:text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
+                                Panel de Admin
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -89,19 +99,26 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-8">
-        <div class="mb-6">
-            <h1 class="text-xl font-bold text-blue-900">Categorías</h1>
-            <p class="text-sm text-gray-600">Selecciona la categoría de tu preferencia</p>
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <h1 class="text-xl font-bold text-blue-900">Categorías</h1>
+                <p class="text-sm text-gray-600">Selecciona la categoría de tu preferencia</p>
+            </div>
+            @if($usuario->rol === 'admin')
+                <a href="{{ route('admin.categorias.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition">
+                    + Nueva Categoría
+                </a>
+            @endif
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             @foreach($categorias as $categoria)
-                <a href="/categoria/{{ $categoria['slug'] }}" class="group relative block h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="{{ $categoria['imagen'] }}" 
-                         alt="{{ $categoria['nombre'] }}" 
+                <a href="{{ route('categoria.show', $categoria->id_categorias) }}" class="group relative block h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="{{ $categoria->imagen ?? 'https://via.placeholder.com/500x400?text=' . $categoria->nombre }}" 
+                         alt="{{ $categoria->nombre }}" 
                          class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4">
-                        <h2 class="text-white font-bold text-lg tracking-wide">{{ $categoria['nombre'] }}</h2>
+                        <h2 class="text-white font-bold text-lg tracking-wide">{{ $categoria->nombre }}</h2>
                     </div>
                 </a>
             @endforeach

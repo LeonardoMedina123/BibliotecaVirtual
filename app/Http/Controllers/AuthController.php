@@ -19,10 +19,15 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        $credentials = [
+            'correo' => $request->input('email'),
+            'password' => $request->input('password'),
+        ];
 
         $remember = $request->has('remember');
 
@@ -51,7 +56,7 @@ class AuthController extends Controller
         // 1. Validamos rigurosamente los datos de registro
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,correo'],
             'password' => ['required', 'string', 'min:8', 'confirmed'], // 'confirmed' busca que coincida con 'password_confirmation'
         ], [
             'email.unique' => 'Este correo institucional ya está registrado.',
@@ -61,9 +66,9 @@ class AuthController extends Controller
 
         // 2. Creamos el registro en la base de datos
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Encriptación segura
+            'nombre' => $request->input('name'),
+            'correo' => $request->input('email'),
+            'password' => Hash::make($request->input('password')), // Encriptación segura
         ]);
 
         // 3. Iniciamos sesión al usuario automáticamente tras registrarse

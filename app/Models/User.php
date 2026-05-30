@@ -9,17 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['nombre', 'correo', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    // ✨ AGREGA ESTA PROPIEDAD AQUÍ ABAJO PARA SOLUCIONAR EL ERROR DEFINITIVAMENTE:
+    protected $table = 'users';
+    protected $primaryKey = 'id_usuario';
+
     protected $fillable = [
-        'name',
-        'email',
+        'nombre',
+        'correo',
         'password',
     ];
 
