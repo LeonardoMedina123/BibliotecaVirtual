@@ -15,6 +15,12 @@ class Categoria extends Model
     // 2. CRUCIAL: Le decimos cuál es tu llave primaria personalizada
     protected $primaryKey = 'id_categorias';
 
+    // Campos que se pueden asignar en masa
+    protected $fillable = [
+        'nombre',
+        'imagen',
+    ];
+
     // Relación con los libros (opcional, para tu vista categoria.blade.php)
     public function libros()
     {
