@@ -24,4 +24,8 @@ class Libro extends Model
             'user_id_usuario'
         )->withTimestamps();
     }
+    public function prestamos()
+{
+    return $this->hasMany(Prestamo::class, 'id_libros', 'id_libros');
+}
 }
