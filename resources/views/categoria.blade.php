@@ -117,12 +117,20 @@
                         </div>
 
                         <div class="flex items-center gap-1 mt-2">
-                            <button class="flex items-center space-x-1 text-blue-700 font-bold hover:text-blue-900 transition">
-                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                </svg>
-                                <span class="text-sm">Favoritos</span>
-                            </button>
+                            <form action="{{ route('libro.favorito', $libro->id_libros) }}" method="POST" class="inline">
+                                @csrf
+                                @php
+                                    // Comprueba si el libro ya está entre los favoritos del usuario
+                                    $esFavorito = $usuario->favoritos->contains($libro->id_libros);
+                                @endphp
+                                
+                                <button type="submit" class="flex items-center space-x-1 font-bold transition {{ $esFavorito ? 'text-red-600 hover:text-red-800' : 'text-blue-700 hover:text-blue-900' }}">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                        <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                    </svg>
+                                    <span class="text-sm">{{ $esFavorito ? 'Quitado de Favs' : 'Favoritos' }}</span>
+                                </button>
+                            </form>
 
                             @if($usuario->rol === 'admin')
                                 <div class="ml-auto flex gap-2">

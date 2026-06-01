@@ -51,4 +51,15 @@ class DashboardController extends Controller
 
         return view('categoria', compact('usuario', 'categoria', 'libros'));
     }
+
+    public function toggleFavorito($id)
+    {
+        $usuario = auth()->user();
+        $libro = Libro::findOrFail($id);
+
+        // Adjunta o remueve automáticamente el libro de los favoritos del usuario
+        $usuario->favoritos()->toggle($libro->id_libros);
+
+        return back()->with('success', 'Lista de favoritos actualizada correctamente.');
+    }
 }

@@ -37,4 +37,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favoritos()
+    {
+        return $this->belongsToMany(
+            Libro::class, 
+            'libro_user',        // Tabla intermedia
+            'user_id_usuario',   // Llave foránea de este modelo
+            'libro_id_libros'    // Llave foránea del modelo a relacionar
+        )->withTimestamps();
+    }
 }

@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     
     // Cierre de sesión
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    //Libros favoritos
+    Route::post('/libro/{id}/favorito', [DashboardController::class, 'toggleFavorito'])->name('libro.favorito');
 });
 
 // 4. Rutas Solo Para ADMIN

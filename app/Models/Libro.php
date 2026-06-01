@@ -14,4 +14,14 @@ class Libro extends Model
     {
         return $this->belongsTo(Categoria::class, 'Categorias_id_categorias', 'id_categorias');
     }
+
+    public function usuariosFavoritos()
+    {
+        return $this->belongsToMany(
+            User::class, 
+            'libro_user', 
+            'libro_id_libros', 
+            'user_id_usuario'
+        )->withTimestamps();
+    }
 }
