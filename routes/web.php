@@ -53,3 +53,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('libros/{libro}', [AdminLibrosController::class, 'update'])->name('libros.update');
     Route::delete('libros/{libro}', [AdminLibrosController::class, 'destroy'])->name('libros.destroy');
 });
+
+use App\Http\Controllers\AdeudoController;
+
+Route::get('/adeudos', [AdeudoController::class, 'index'])
+    ->name('adeudos.index');
