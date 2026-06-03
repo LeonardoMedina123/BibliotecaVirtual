@@ -19,9 +19,9 @@
                     <p class="text-gray-400 text-[10px]">{{ $usuario->correo }}</p>
                 </div>
             </div>
-            <div class="text-sm font-bold tracking-wider text-gray-300">
+            <a href="{{ route('dashboard') }}" class="text-sm font-bold tracking-wider text-gray-300">
                 TECNOLÓGICO NACIONAL DE MÉXICO
-            </div>
+</a>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">

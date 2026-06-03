@@ -12,9 +12,7 @@
             <tr class="bg-blue-900 text-white">
                 <th class="p-3 text-left">Libro</th>
                 <th class="p-3 text-left">Autor</th>
-                <th class="p-3 text-left">Usuario</th>
                 <th class="p-3 text-left">Fecha límite</th>
-                <th class="p-3 text-left">Días de atraso</th>
             </tr>
         </thead>
 
@@ -23,15 +21,11 @@
                 <tr class="border-b hover:bg-gray-100">
                     <td class="p-3">{{ $adeudo->libro->titulo }}</td>
                     <td class="p-3">{{ $adeudo->libro->autor }}</td>
-                    <td class="p-3">{{ $adeudo->usuario->nombre }}</td>
-                    <td class="p-3">{{ $adeudo->fecha_limite }}</td>
-                    <td class="p-3 text-red-600 font-bold">
-                        {{ \Carbon\Carbon::parse($adeudo->fecha_limite)->diffInDays(now()) }}
-                    </td>
+                    <td class="p-3">{{ \Carbon\Carbon::parse($adeudo->fecha_limite)->format('d/m/Y') }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center p-4">
+                    <td colspan="3" class="text-center p-4">
                         No hay adeudos pendientes.
                     </td>
                 </tr>

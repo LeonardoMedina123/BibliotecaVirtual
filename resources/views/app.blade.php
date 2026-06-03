@@ -19,9 +19,9 @@
                     <p class="text-gray-400 text-[10px]">{{ $usuario->correo }}</p>
                 </div>
             </div>
-            <div class="text-sm font-bold tracking-wider text-gray-300">
+            <a href="{{ route('dashboard') }}" class="text-sm font-bold tracking-wider text-gray-300">
                 TECNOLÓGICO NACIONAL DE MÉXICO
-            </div>
+            </a>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
@@ -35,6 +35,13 @@
 
                 <div id="dropdown-menu" class="hidden absolute left-0 mt-2 w-52 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 overflow-hidden">
                     <div class="py-1">
+                        <a href="{{ route('favorito.index') }}" class="group flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-4 w-4 text-red-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            Favoritos y Rentas
+                        </a>
+
                         <a href="#" class="group flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-900 hover:text-white transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 h-4 w-4 text-gray-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -70,8 +77,8 @@
             </div>
 
             <div class="flex-1 max-w-2xl">
-                <form action="#" method="GET" class="relative">
-                    <input type="text" 
+                <form action="{{ route('search') }}" method="GET" class="relative">
+                    <input type="text" name="q" value="{{ request('q') }}"
                            placeholder="Busca los libros de tu preferencia (Editorial, título o autor)..." 
                            class="w-full bg-gray-200 text-gray-800 placeholder-gray-500 pl-4 pr-10 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition text-sm shadow-inner">
                     <button type="submit" class="absolute right-3 top-2.5 text-gray-500 hover:text-blue-600">

@@ -9,11 +9,11 @@ class AdeudoController extends Controller
 {
     public function index()
     {
-        $adeudos = Adeudo::with(['libro', 'usuario'])
-            ->where('fecha_limite', '<', now())
-            ->get();
-
         $usuario = Auth::user();
+
+        $adeudos = Adeudo::with(['libro'])
+            ->where('Usuarios_id_usuario', $usuario->id_usuario)
+            ->get();
 
         return view('Adeudos', compact('adeudos', 'usuario'));
     }

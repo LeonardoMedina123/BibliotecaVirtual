@@ -52,6 +52,23 @@ class DashboardController extends Controller
         return view('categoria', compact('usuario', 'categoria', 'libros'));
     }
 
+    public function search(Request $request)
+    {
+        $usuario = Auth::user();
+
+        $q = $request->get('q');
+
+        $libros = collect();
+        if ($q) {
+            $libros = Libro::where('titulo', 'like', "%{$q}%")
+                ->orWhere('autor', 'like', "%{$q}%")
+                ->orWhere('editorial', 'like', "%{$q}%")
+                ->get();
+        }
+
+        return view('search', compact('usuario', 'libros', 'q'));
+    }
+
     public function toggleFavorito($id)
     {
         $usuario = auth()->user();

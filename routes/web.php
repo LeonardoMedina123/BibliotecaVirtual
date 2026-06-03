@@ -33,6 +33,16 @@ Route::middleware('auth')->group(function () {
 
     //Libros favoritos
     Route::post('/libro/{id}/favorito', [DashboardController::class, 'toggleFavorito'])->name('libro.favorito');
+
+    // Rutas de Favoritos y Rentas
+    Route::get('/favoritos', [\App\Http\Controllers\FavoritoController::class, 'index'])->name('favorito.index');
+    Route::post('/favoritos/{id}/rentar', [\App\Http\Controllers\FavoritoController::class, 'rentar'])->name('favorito.rentar');
+
+    // Ruta de Adeudos
+    Route::get('/adeudos', [\App\Http\Controllers\AdeudoController::class, 'index'])->name('adeudos.index');
+    
+    // Ruta de búsqueda
+    Route::get('/search', [\App\Http\Controllers\DashboardController::class, 'search'])->name('search');
 });
 
 // 4. Rutas Solo Para ADMIN
@@ -53,8 +63,3 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('libros/{libro}', [AdminLibrosController::class, 'update'])->name('libros.update');
     Route::delete('libros/{libro}', [AdminLibrosController::class, 'destroy'])->name('libros.destroy');
 });
-
-use App\Http\Controllers\AdeudoController;
-
-Route::get('/adeudos', [AdeudoController::class, 'index'])
-    ->name('adeudos.index');
