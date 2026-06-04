@@ -6,10 +6,6 @@
              class="h-40 w-auto object-contain">
     </div>
 
-    <div class="flex items-right gap-4">
-        <img src="3puntos.png"
-             alt="Menú"
-             class="h-15 w-15 cursor-pointer opacity-90 hover:opacity-100">
-    </div>
+    
 
   </header>
