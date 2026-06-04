@@ -1,83 +1,23 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse | Biblioteca Virtual</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="h-screen w-screen bg-cover bg-center bg-no-repeat overflow-hidden relative" style="background-image: url('fondo.jpg');">
+    @include('Header')
 
-<form method="POST" action="{{ route('register') }}" class="min-h-screen bg-[url('fondo.jfif')] bg-cover bg-center flex items-center justify-center p-4">
-  @csrf 
-  <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden w-full max-w-md">
-    
-    <div class="bg-[#004494] p-6 flex flex-col items-center justify-center text-white">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-      </svg>
-      <h2 class="text-3xl font-bold tracking-tight">Crear Cuenta</h2>
-    </div>
-
-    <div class="p-8 space-y-4">
-      
-      @if ($errors->any())
-        <div class="bg-red-50 border-l-4 border-red-500 p-3 rounded-md">
-          <ul class="text-xs text-red-600 list-disc list-inside">
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
+    <main class="flex flex-col lg:flex-row items-center justify-between h-full w-full px-8 md:px-24 gap-10">
+        <div class="w-full lg:max-w-xl text-white">
+            <h1 class="text-7xl md:text-9xl font-semibold leading-[0.85] tracking-tight">Biblioteca <br> Virtual</h1>
+            <p class="mt-6 text-lg md:text-xl text-white/90">Crea tu cuenta y únete a la experiencia digital de la biblioteca. Gestiona tus préstamos, favoritos y lecturas con estilo.</p>
         </div>
-      @endif
 
-      <div>
-        <label for="name" class="block text-[#004494] font-bold text-sm mb-1">Nombre Completo *</label>
-        <input type="text" 
-               id="name"
-               name="name" 
-               value="{{ old('name') }}"
-               required 
-               autofocus
-               placeholder="Tu Nombre Completo" 
-               class="w-full bg-gray-200 border-none rounded-full px-4 py-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none">
-      </div>
-
-      <div>
-        <label for="email" class="block text-[#004494] font-bold text-sm mb-1">Correo Institucional *</label>
-        <input type="email" 
-               id="email"
-               name="email" 
-               value="{{ old('email') }}"
-               required 
-               placeholder="ejemplo@aguascalientes.tecnm.mx" 
-               class="w-full bg-gray-200 border-none rounded-full px-4 py-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none">
-      </div>
-
-      <div>
-        <label for="password" class="block text-[#004494] font-bold text-sm mb-1">Contraseña *</label>
-        <input type="password" 
-               id="password"
-               name="password" 
-               required
-               placeholder="Mínimo 8 caracteres" 
-               class="w-full bg-gray-200 border-none rounded-full px-4 py-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none">
-      </div>
-
-      <div>
-        <label for="password_confirmation" class="block text-[#004494] font-bold text-sm mb-1">Confirmar Contraseña *</label>
-        <input type="password" 
-               id="password_confirmation"
-               name="password_confirmation" 
-               required
-               placeholder="Repite tu contraseña" 
-               class="w-full bg-gray-200 border-none rounded-full px-4 py-2 text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none">
-      </div>
-
-      <div class="pt-2">
-        <button type="submit" class="w-full bg-[#004494] text-white font-bold py-2 rounded-full shadow-sm hover:bg-blue-800 transition-colors">
-          Registrarme
-        </button>
-      </div>
-
-      <div class="text-center pt-4">
-        <p class="text-sm text-gray-600">
-          ¿Ya tienes cuenta? <a href="{{ route('login') }}" class="text-sky-500 font-semibold hover:underline">Inicia Sesión</a>
-        </p>
-      </div>
-
-    </div>
-  </div>
-</form>
+        <div class="w-full lg:flex-1 lg:max-w-[44rem]">
+            @include('partials.auth.register-form')
+        </div>
+    </main>
+</body>
+</html>
