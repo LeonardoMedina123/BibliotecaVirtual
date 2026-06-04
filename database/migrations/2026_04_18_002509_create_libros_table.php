@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('libros', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id('id_libros');
+        $table->string('titulo', 150);
+        $table->string('autor', 100);
+        $table->string('editorial', 100);
+        $table->string('portada_url')->nullable();
+        // Llave foránea
+        $table->foreignId('Categorias_id_categorias')
+              ->constrained('categorias', 'id_categorias');
+        $table->timestamps();
         });
     }
 
